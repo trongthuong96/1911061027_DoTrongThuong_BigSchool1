@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31410.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "1911061027_DoTrongThuong_BigSchool", "1911061027_DoTrongThuong_BigSchool\1911061027_DoTrongThuong_BigSchool.csproj", "{1A80E1E7-2C4B-43D4-BDAC-7CAA5E0F8B56}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1A80E1E7-2C4B-43D4-BDAC-7CAA5E0F8B56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A80E1E7-2C4B-43D4-BDAC-7CAA5E0F8B56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A80E1E7-2C4B-43D4-BDAC-7CAA5E0F8B56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A80E1E7-2C4B-43D4-BDAC-7CAA5E0F8B56}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {72011A05-AD11-49CA-9831-68B663EC6630}
+	EndGlobalSection
+EndGlobal
