@@ -33,7 +33,7 @@ namespace _1911061027_DoTrongThuong_BigSchool.Controllers
         //
         [Authorize]
         [HttpPost]
-       // [ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(CourseViewModel viewModel)
         {
 
