@@ -12,6 +12,7 @@ namespace _1911061027_DoTrongThuong_BigSchool.ViewModels
         public string Date { get; set; }
         public string Time { get; set; }
 
+        public byte Category { get; set; }
         public IEnumerable<Category> Categories { get; set; }
 
         public DateTime GetDateTime()
