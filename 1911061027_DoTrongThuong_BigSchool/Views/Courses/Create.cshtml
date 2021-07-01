@@ -1,4 +1,4 @@
-﻿@model _1911061027_DoTrongThuong_BigSchool.Models.Course
+﻿@model _1911061027_DoTrongThuong_BigSchool.ViewModels.CourseViewModel
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -11,6 +11,11 @@
         @Html.TextBoxFor(m => m.Place, new { @class = "form-control" })
     </div>
     <div class=" form-group">
-        @Html.LabelFor(m=>m.DateTime)
+        @Html.LabelFor(m => m.Date)
+        @Html.TextBoxFor(m => m.Date, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Time)
+        @Html.TextBoxFor(m => m.Time, new { @class = "form-control" })
     </div>
 </form>
