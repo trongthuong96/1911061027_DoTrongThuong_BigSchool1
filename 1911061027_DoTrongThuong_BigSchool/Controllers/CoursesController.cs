@@ -54,7 +54,7 @@ namespace _1911061027_DoTrongThuong_BigSchool.Controllers
             _dbContext.Courses.Add(course);
             _dbContext.SaveChanges();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Mine", "Courses");
         }
 
         [Authorize]
@@ -76,6 +76,19 @@ namespace _1911061027_DoTrongThuong_BigSchool.Controllers
             };
 
             return View(viewModel);
+        }
+
+        [Authorize]
+        public ActionResult Mine()
+        {
+            var userId = User.Identity.GetUserId();
+            var courses = _dbContext.Courses
+                .Where(c => c.LecturerId == userId && c.DateTime > DateTime.Now)
+                .Include(l => l.Lecturer)
+                .Include(c => c.Category)
+                .ToList();
+
+            return View(courses);
         }
     }
 }
