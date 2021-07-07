@@ -68,6 +68,7 @@ namespace _1911061027_DoTrongThuong_BigSchool.Controllers
                 .Select(a => a.Course)
                 .Include(l => l.Lecturer)
                 .Include(l => l.Category)
+                .Where(a => a.IsCanceled == false)
                 .ToList();
 
             var viewModel = new CourseViewModel
