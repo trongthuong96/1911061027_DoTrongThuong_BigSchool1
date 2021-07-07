@@ -23,7 +23,6 @@
                 </div>
                 <div class="category">
                     @course.Category.Name
-                    @course.Category.Name
                 </div>
             </div>
             <div class="action">
@@ -37,7 +36,28 @@
 
 @section scripts
 {
-    $(document).ready(function)() {
-        $(".js-cancel-course")
-    }
+    <script>
+        $(document).ready(function () {
+            $(".js-cancel-course").click(function (e) {
+                e.preventDefault();
+                var link = $(e.target);
+                bootbox.confirm("Are you sure to Cancel!",
+                    function () {
+                        $.ajax({
+                            url: "/api/courses/" + link.attr("data-course-id"),
+                            method: "DELETE"
+                        })
+                            .done(function () {
+                                link.parents("li").fadeOut(function () {
+                                    $(this).remove();
+                                });
+                            })
+                            .fail(function () {
+                                alert("Something failed!");
+                            });
+                    });
+            });
+        });
+    </script>
 }
+

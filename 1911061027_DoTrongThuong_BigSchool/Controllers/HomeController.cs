@@ -23,7 +23,7 @@ namespace _1911061027_DoTrongThuong_BigSchool.Controllers
             var upcommingCourses = _dbContext.Courses
                 .Include(c => c.Lecturer)
                 .Include(c => c.Category)
-                .Where(c => c.DateTime > DateTime.Now);
+                .Where(c => c.DateTime > DateTime.Now && c.IsCanceled == false);
 
             var viewModel = new CourseViewModel
             {
