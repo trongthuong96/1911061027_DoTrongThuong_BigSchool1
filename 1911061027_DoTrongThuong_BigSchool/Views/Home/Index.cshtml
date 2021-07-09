@@ -1,12 +1,17 @@
 ﻿@model _1911061027_DoTrongThuong_BigSchool.ViewModels.CourseViewModel
+@using Microsoft.AspNet.Identity
+@using _1911061027_DoTrongThuong_BigSchool.Models
 @{
     ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="row">
     <ul class="course">
         @foreach (var course in Model.UpcommingCourses)
         {
+            var userId = User.Identity.GetUserId();
+            ApplicationDbContext _dbContext = new ApplicationDbContext();
             <li>
                 <div class="date">
                     <div class="month">
@@ -21,16 +26,37 @@
                         @course.Lecturer.Name
                         @if (Model.ShowAction)
                         {
-                            <button class="btn btn-default btn-sm js-toggle-follow" data-user-id="@course.LecturerId">Follow</button>
+                            bool isGoing = _dbContext.Followings.Any(a => a.FollowerId == userId && a.FolloweeId == course.LecturerId);
+
+                            if (isGoing)
+                            {
+                                <button class="btn btn-danger btn-sm js-toggle-follow" data-user-id="@course.LecturerId">Following</button>
+                            }
+                            else
+                            {
+                                <button class="btn btn-default btn-sm js-toggle-follow" data-user-id="@course.LecturerId">Follow</button>
+                            }
+                            
                         }
                     </span>
                     <br />
                     <span class="category">
                         @course.Category.Name
                     </span>
+
                     @if (Model.ShowAction)
                     {
-                        <button data-course-id="@course.Id" class="btn btn-default btn-sm js-toggle-attendance">Going?</button>
+                        bool isGoing = _dbContext.Attendances.Any(a => a.AttendeeId == userId && a.CourseId == course.Id);
+
+                        if (isGoing)
+                        {
+                            <button data-course-id="@course.Id" class="btn btn-info btn-sm js-toggle-attendance">Going</button>
+                        }
+                        else
+                        {
+                            <button data-course-id="@course.Id" class="btn btn-default btn-sm js-toggle-attendance">Going?</button>
+                        }
+
                     }
                 </div>
             </li>
@@ -78,7 +104,7 @@
                         .done(function () {
                             button
                                 .removeClass("btn-default")
-                                .addClass("text-primary")
+                                .addClass("btn-danger")
                                 .text("Following");
 
                         })
@@ -92,7 +118,7 @@
                     })
                         .done(function () {
                             button
-                                .removeClass("text-primary")
+                                .removeClass("btn-danger")
                                 .addClass("btn-default")
                                 .text("Follow");
                         })
