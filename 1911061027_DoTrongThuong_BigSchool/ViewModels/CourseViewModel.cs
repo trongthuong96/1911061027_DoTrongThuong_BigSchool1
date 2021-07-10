@@ -34,6 +34,8 @@ namespace _1911061027_DoTrongThuong_BigSchool.ViewModels
 
         public DateTime GetDateTime()
         {
+            if (Date is null && Time is null)
+                return DateTime.Now;
             return DateTime.Parse(string.Format("{0} {1}", Date, Time));
         }
 

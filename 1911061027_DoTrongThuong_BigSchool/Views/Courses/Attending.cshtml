@@ -6,31 +6,34 @@
 
 <h2>Attending</h2>
 
-<div class="row">
-    <ul class="course">
+<div class="panel panel-default text-center">
+    <!-- Default panel contents -->
+    <div class="panel-heading"><h3><b>Khoá Học Đã Đăng Ký</b></h3></div>
+
+    <!-- Table -->
+    <table class="table">
+        <tr>
+            <td><b>STT</b></td>
+            <td><b>Ngày Tháng</b></td>
+            <td><b>Môn Học</b></td>
+            <td><b>Giảng Viên</b></td>
+        </tr>
+
+        @{int i = 0;}
         @foreach (var course in Model.UpcommingCourses)
         {
-            <li>
-                <div class="date">
-                    <div class="month">
-                        @course.DateTime.ToString("MM")
-                    </div>
-                    <div class="day">
-                        @course.DateTime.ToString("dd")
-                    </div>
-                </div>
-                <div class="details">
-                    <span class="lecturer">
-                        @course.Lecturer.Name
-                      
-                    </span>
-                    <br />
-                    <span class="category">
-                        @course.Category.Name
-                    </span>
-                   
-                </div>
-            </li>
+            <tr>
+                <td>@{++i;} @i </td>
+                <td>@course.DateTime.ToString("dd")-@course.DateTime.ToString("MM")</td>
+                <td>
+                    @course.Category.Name
+                </td>
+                <td>
+                    @course.Lecturer.Name
+                </td>
+               
+            </tr>
         }
-    </ul>
+
+    </table>
 </div>

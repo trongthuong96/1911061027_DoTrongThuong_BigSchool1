@@ -6,44 +6,36 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="row">
-    <ul class="course">
+<div class="panel panel-default text-center">
+    <!-- Default panel contents -->
+    <div class="panel-heading"><h3><b>Khoá Học</b></h3></div>
+
+    <!-- Table -->
+    <table class="table">
+        <tr>
+            <td><b>STT</b></td>
+            <td><b>Ngày Tháng</b></td>
+            <td><b>Môn Học</b></td>
+            <td><b>Giảng Viên</b></td>
+            <td><b>Đăng ký/Follow Giảng Viên</b></td>
+        </tr>
+
+        @{int i = 0;}
         @foreach (var course in Model.UpcommingCourses)
         {
+
             var userId = User.Identity.GetUserId();
             ApplicationDbContext _dbContext = new ApplicationDbContext();
-            <li>
-                <div class="date">
-                    <div class="month">
-                        @course.DateTime.ToString("MM")
-                    </div>
-                    <div class="day">
-                        @course.DateTime.ToString("dd")
-                    </div>
-                </div>
-                <div class="details">
-                    <span class="lecturer">
-                        @course.Lecturer.Name
-                        @if (Model.ShowAction)
-                        {
-                            bool isGoing = _dbContext.Followings.Any(a => a.FollowerId == userId && a.FolloweeId == course.LecturerId);
-
-                            if (isGoing)
-                            {
-                                <button class="btn btn-danger btn-sm js-toggle-follow" data-user-id="@course.LecturerId">Following</button>
-                            }
-                            else
-                            {
-                                <button class="btn btn-default btn-sm js-toggle-follow" data-user-id="@course.LecturerId">Follow</button>
-                            }
-                            
-                        }
-                    </span>
-                    <br />
-                    <span class="category">
-                        @course.Category.Name
-                    </span>
-
+            <tr>
+                <td>@{++i;} @i </td>
+                <td>@course.DateTime.ToString("dd")-@course.DateTime.ToString("MM")</td>
+                <td>
+                    @course.Category.Name
+                </td>
+                <td>
+                    @course.Lecturer.Name
+                </td>
+                <td>
                     @if (Model.ShowAction)
                     {
                         bool isGoing = _dbContext.Attendances.Any(a => a.AttendeeId == userId && a.CourseId == course.Id);
@@ -54,19 +46,35 @@
                         }
                         else
                         {
-                            <button data-course-id="@course.Id" class="btn btn-default btn-sm js-toggle-attendance">Going?</button>
+                            <button data-course-id="@course.Id" class="btn btn-default btn-sm js-toggle-attendance">Going</button>
+                        }
+                    }
+                    @if (Model.ShowAction)
+                    {
+                        bool isGoing = _dbContext.Followings.Any(a => a.FollowerId == userId && a.FolloweeId == course.LecturerId);
+
+                        if (isGoing)
+                        {
+                            <button class="btn btn-danger btn-sm js-toggle-follow" data-user-id="@course.LecturerId">Following</button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-default btn-sm js-toggle-follow" data-user-id="@course.LecturerId">Follow</button>
                         }
 
                     }
-                </div>
-            </li>
+                </td>
+            </tr>
         }
-    </ul>
+
+    </table>
 </div>
+
 @section scripts
 {
     <script>
         $(document).ready(function () {
+
             $(".js-toggle-attendance").click(function (e) {
                 var button = $(e.target);
                 if (button.hasClass("btn-default")) {
@@ -89,7 +97,7 @@
                             button
                                 .removeClass("btn-info")
                                 .addClass("btn-default")
-                                .text("Going?");
+                                .text("Going");
                         })
                         .fail(function () {
                             alert("Something failed");
@@ -130,4 +138,3 @@
         });
     </script>
 }
-

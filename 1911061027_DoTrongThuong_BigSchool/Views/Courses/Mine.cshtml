@@ -5,34 +5,44 @@
 }
 
 <h2>Mine</h2>
-<ul class="course">
-    @foreach (var course in Model)
-    {
-        <li>
-            <div class="date">
-                <div class="month">
-                    @course.DateTime.ToString("MM")
-                </div>
-                <div class="day">
-                    @course.DateTime.ToString("dd")
-                </div>
-            </div>
-            <div class="details">
-                <div class="lectuer">
-                    @course.Lecturer.Name
-                </div>
-                <div class="category">
-                    @course.Category.Name
-                </div>
-            </div>
-            <div class="action">
-                <a href="@Url.Action("Edit", "Courses", new { id = course.Id })">Edit</a>
 
-                <a href="#" class="js-cancel-course" data-course-id="@course.Id">Cancel</a>
-            </div>
-        </li>
-    }
-</ul>
+<div class="panel panel-default text-center">
+    <!-- Default panel contents -->
+    <div class="panel-heading"><h3><b>Khoá Học Đã Tạo</b></h3></div>
+
+    <!-- Table -->
+    <table class="table">
+        <tr>
+            <td><b>STT</b></td>
+            <td><b>Ngày Tháng</b></td>
+            <td><b>Môn Học</b></td>
+            <td><b>Giảng Viên</b></td>
+            <td><b>Sửa/Xóa</b></td>
+        </tr>
+
+        @{int i = 0;}
+        @foreach (var course in Model)
+        {
+
+            <tr>
+                <td>@{++i;} @i </td>
+                <td>@course.DateTime.ToString("dd")-@course.DateTime.ToString("MM")</td>
+                <td>
+                    @course.Category.Name
+                </td>
+                <td>
+                    @course.Lecturer.Name
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit", "Courses", new { id = course.Id })">Edit</a>
+                    -
+                    <a href="#" class="js-cancel-course" data-course-id="@course.Id">Cancel</a>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
 
 @section scripts
 {
