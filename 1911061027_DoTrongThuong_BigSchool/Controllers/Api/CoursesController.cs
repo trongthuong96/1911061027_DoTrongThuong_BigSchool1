@@ -32,5 +32,20 @@ namespace _1911061027_DoTrongThuong_BigSchool.Controllers.Api
 
             return Ok();
         }
+
+        [HttpPost]
+        public IHttpActionResult Show(int id)
+        {
+            var userId = User.Identity.GetUserId();
+            var course = _dbContext.Courses.Single(c => c.Id == id && c.LecturerId == userId);
+
+            if (!course.IsCanceled)
+                return NotFound();
+
+            course.IsCanceled = false;
+            _dbContext.SaveChanges();
+
+            return Ok();
+        }
     }
 }
