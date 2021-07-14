@@ -20,11 +20,12 @@ namespace _1911061027_DoTrongThuong_BigSchool
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
+                      "~/Scripts/popper.min.js",
+                      "~/Scripts/bootstrap.min.js",
                       "~/Scripts/bootbox.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Content/bootstrap1.min.css",
                       "~/Content/site.css"));
         }
     }

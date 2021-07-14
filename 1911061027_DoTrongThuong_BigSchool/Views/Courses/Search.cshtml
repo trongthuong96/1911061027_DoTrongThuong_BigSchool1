@@ -1,0 +1,48 @@
+﻿@model _1911061027_DoTrongThuong_BigSchool.ViewModels.CourseViewModel
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Search</h2>
+
+<div class="panel panel-default text-center">
+    <!-- Default panel contents -->
+    <div class="panel-heading"><h3><b>Khoá Học Đã Tạo</b></h3></div>
+
+    <!-- Table -->
+    <table class="table">
+        <tr>
+            <td><b>STT</b></td>
+            <td><b>Ngày Tháng</b></td>
+            <td><b>Môn Học</b></td>
+            <td><b>Giảng Viên</b></td>
+        </tr>
+
+        @{int i = 0;}
+        @using (Html.BeginForm(Model.Action, "Courses"))
+        {
+
+            <tr>
+                <td>@{++i;} @i </td>
+                <td>
+                    @Html.LabelFor(m => m.Date)
+                                @Html.TextBoxFor(m => m.Date, htmlAttributes: new
+                                {
+                                    @class = "form-control",
+                                    Type = "Date"@*, @Value = Model.GetDateTime().ToString("yyyy-MM-dd")*@})
+                                @Html.ValidationMessageFor(m => m.Date)
+                            </td>
+                <td>
+                    @Html.LabelFor(m => m.Category)
+                    @Html.DropDownListFor(m => m.Category, new SelectList(Model.Categories, "Id", "Name"), "", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Category)
+                </td>
+                <td>
+                </td>
+
+            </tr>
+        }
+
+    </table>
+</div>

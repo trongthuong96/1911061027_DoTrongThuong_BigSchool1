@@ -108,7 +108,7 @@ namespace _1911061027_DoTrongThuong_BigSchool.Controllers
         {
             var userId = User.Identity.GetUserId();
             var courses = _dbContext.Courses
-                .Where(c => c.LecturerId == userId && c.DateTime > DateTime.Now /*&& c.IsCanceled == false*/)
+                .Where(c => c.LecturerId == userId && c.DateTime > DateTime.Now && c.IsCanceled == false)
                 .Include(l => l.Lecturer)
                 .Include(c => c.Category)
                 .ToList();
@@ -157,6 +157,20 @@ namespace _1911061027_DoTrongThuong_BigSchool.Controllers
 
             return RedirectToAction("Index", "Home");
 
+        }
+
+        // GET: Link
+        public ActionResult Search(string Name)
+        {
+
+            var userId = User.Identity.GetUserId();
+            var course = _dbContext.Courses.Single(c=>c.IsCanceled == false && c.Id == _dbContext.Categories.FirstOrDefault(d => d.Id == c.Id).Id);
+
+            course.Place = course.Place;
+            course.DateTime = course.DateTime;
+            course.CategoryId = course.CategoryId;
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }
