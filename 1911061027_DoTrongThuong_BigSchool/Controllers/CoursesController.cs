@@ -91,7 +91,7 @@ namespace _1911061027_DoTrongThuong_BigSchool.Controllers
                 )
                 .Include(l => l.Lecturer)
                 .Include(l => l.Category)
-                .Where(a => a.IsCanceled == false)
+                .Where(a => a.IsCanceled == false && a.DateTime > DateTime.Now)
                 .ToList();
 
             var viewModel = new CourseViewModel
