@@ -21,7 +21,7 @@
             {
                 <td><b>Đăng ký/Follow Giảng Viên</b></td>
             }
-            </tr>
+        </tr>
 
         @{int i = 0;}
         @foreach (var course in Model.UpcommingCourses)
@@ -29,45 +29,44 @@
 
             var userId = User.Identity.GetUserId();
             ApplicationDbContext _dbContext = new ApplicationDbContext();
-    <tr>
-        <td>@{++i;} @i </td>
-        <td>@course.DateTime.ToString("dd")-@course.DateTime.ToString("MM")</td>
-        <td>
-            @course.Category.Name
-        </td>
-        <td>
-            @course.Lecturer.Name
-        </td>
-        @if (Model.ShowAction)
-        {
-            <td>
-                @{bool isGoing = _dbContext.Attendances.Any(a => a.AttendeeId == userId && a.CourseId == course.Id);
+            <tr>
+                <td>@{++i;} @i </td>
+                <td>@course.DateTime.ToString("dd")-@course.DateTime.ToString("MM")</td>
+                <td>
+                    @course.Category.Name
+                </td>
+                <td>
+                    @course.Lecturer.Name
+                </td>
+                @if (Model.ShowAction)
+                {
+                    <td>
+                        @{bool isGoing = _dbContext.Attendances.Any(a => a.AttendeeId == userId && a.CourseId == course.Id);
 
-                    if (isGoing)
-                    {
-                <button data-course-id="@course.Id" class="btn btn-info btn-sm js-toggle-attendance">Going</button>
-                    }
-                    else
-                    {
-                <button data-course-id="@course.Id" class="btn btn-default btn-sm js-toggle-attendance">Going</button>
-                    }
+                            if (isGoing)
+                            {
+                                <button data-course-id="@course.Id" class="btn btn-info btn-sm js-toggle-attendance">Going</button>
+                            }
+                            else
+                            {
+                                <button data-course-id="@course.Id" class="btn btn-default btn-sm js-toggle-attendance">Going</button>
+                            }
 
-                    isGoing = _dbContext.Followings.Any(a => a.FollowerId == userId && a.FolloweeId == course.LecturerId);
+                            isGoing = _dbContext.Followings.Any(a => a.FollowerId == userId && a.FolloweeId == course.LecturerId);
 
-                    if (isGoing)
-                    {
-                <button class="btn btn-danger btn-sm js-toggle-follow" data-user-id="@course.LecturerId">Following</button>
-                    }
-                    else
-                    {
-                <button class="btn btn-default btn-sm js-toggle-follow" data-user-id="@course.LecturerId">Follow</button>
+                            if (isGoing)
+                            {
+                                <button class="btn btn-danger btn-sm js-toggle-follow" data-user-id="@course.LecturerId">Following</button>
+                            }
+                            else
+                            {
+                                <button class="btn btn-default btn-sm js-toggle-follow" data-user-id="@course.LecturerId">Follow</button>
+                            }
                         }
-                    }
-            </td>
+                    </td>
+                }
+            </tr>
         }
-        </tr>
-            }
-
     </table>
 </div>
 

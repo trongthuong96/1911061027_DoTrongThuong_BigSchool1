@@ -58,7 +58,7 @@
                                 method: "DELETE"
                             })
                                 .done(function () {
-                                    link.parents("li").fadeOut(function () {
+                                    link.parents("tr").fadeOut(function () {
                                         $(this).remove();
                                     });
                                 })
